@@ -219,5 +219,6 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Raw datasets
-/data/raw/*.csv
+# Raw datasets: keep source data available for reproducibility.
+# Uncomment the next line only if you intentionally want to exclude raw CSV files.
+# /data/raw/*.csv
