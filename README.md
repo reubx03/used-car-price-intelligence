@@ -142,3 +142,56 @@ B.Tech — Artificial Intelligence & Data Science
 ---
 
 *Developed as a machine learning regression project using Python and Streamlit.*
+
+
+## Reproducible training pipeline
+
+The reusable implementation is in `src/`:
+
+- `data_preprocessing.py`: load the original CSV, remove exact duplicates, and save the cleaned CSV.
+- `feature_engineering.py`: extract the vehicle brand and build the preprocessing transformer.
+- `train.py`: train Linear Regression, Decision Tree, and Random Forest pipelines; evaluate them; save model files and a metrics CSV.
+- `evaluate.py`: calculate MAE, RMSE, and R².
+
+### Dataset setup
+
+Download the original **CAR DETAILS FROM CAR DEKHO.csv** file and place it at:
+
+```text
+data/raw/CAR DETAILS FROM CAR DEKHO.csv
+```
+
+A public copy of the dataset is available at:
+https://raw.githubusercontent.com/chandanverma07/DataSets/master/CAR%20DETAILS%20FROM%20CAR%20DEKHO.csv
+
+Then recreate the cleaned dataset and train the models:
+
+```bash
+python -m src.train --from-raw
+```
+
+If you already have the cleaned dataset and only want to retrain:
+
+```bash
+python -m src.train
+```
+
+The training script saves the three model pipelines, `models/best_model.pkl`, and `reports/metrics/model_comparison.csv`.
+
+### Run checks
+
+Install development dependencies with:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+Run tests:
+
+```bash
+python -m pytest
+```
+
+### Deployment
+
+See [DEPLOYMENT_AWS.md](DEPLOYMENT_AWS.md) for the EC2 deployment outline. The current Streamlit app uses the saved model and cleaned CSV; both must be present on the server.
